@@ -1,0 +1,64 @@
+Computation of a matrix Q, representing the scanner configuration, used in a 3D magnetic resonance image reconstruction algorithm in non-Cartesian space.
+
+See also:
+  Sam S. Stone, Justin P. Haldar, Stephanie C. Tsao, Wen-Mei W. Hwu, Zhi-Pei Liang, and Bradley P. Sutton.  "Accelerating Advanced MRI Reconstructions on GPUs."  In Computing Frontiers, 2008.
+
+Your task is to accelerate using GPGPUs.  Your goal is to make the GPU
+    kernel execution as fast as you can with the following
+    restriction.
+
+    The restults must be deterministic and match the result of the
+	sequential code (within rounding errors).  This means you may not use the fast math
+	versions of sin and cos, and the order of accumulation
+	operations must be the same.  While some optimizations can
+	trade off accuracy for speed, we're asking you to maintain
+	current semantics exactly.
+
+3)  The given interface for the application is as follows.  
+
+    You must specify using the -i option the input file.  The dataset directory includes three different size input files.
+
+    You may specify the option -S to get more accurate timings (inserts 
+    synchronization after non-blocking events).  This is how we will 
+    measure your final speed.
+
+    You may specify an output file using the -o option.  You can then 
+    analyse the output file however you like, including comparing it to 
+    other output files using the python script in the tools directory.
+
+    You may specify as the last command line parameter an integer number 
+    to limit the number of input samples used.  This can be useful in testing
+    or verifying your code in a shorter amount of time.  For reference, we 
+    also provide correct output files for using 512 or 10000 samples.  Keep in 
+    mind that your optimizations should not put restrictions on the number of 
+    samples you may be provided with as input, although you could potentially
+    pad or otherwise handle it internally.  
+    
+4)  Your report should detail all optimizations you
+    tried, including those that ultimately were abandonded or worsened
+    performance.  For every optimization
+    tried, and each entry should note:
+
+    1) Describe the intuition
+    2) What changes you made for the optimization
+    2) any difficulties with completing the optimization correctly 
+       (debugging effort, etc.)
+    3) the amount of time spent on it (even if it was abandoned) 
+
+Grading:  
+
+Your submission will be graded on the following parameters.  
+
+Demo/knowledge: 25%
+    - 10% Produces correct result output file for our test inputs.
+    - 25% = (Your runtime / reference solution runtime) * 25
+		(Yes, you can get over 100 on this assignment.  Maybe.)
+
+Demo/Functionality:  40%
+    - Major optimizations enabled
+      Register promotion, Memory space usage (constant? shared?)
+
+Report: 35%
+    - Complete and accurate report.  We will at least check for discrepencies, 
+      optimizations that you did but didn't report, etc.  
+
